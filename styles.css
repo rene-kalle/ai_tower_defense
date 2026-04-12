@@ -1,0 +1,495 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #2C3E50;
+    color: #ECF0F1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    user-select: none;
+}
+
+/* Header */
+.game-header {
+    padding: 24px;
+    text-align: center;
+}
+
+.game-header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #F1C40F;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Main Game Container */
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    max-width: 1200px;
+    width: 100%;
+    padding: 0 16px;
+}
+
+/* Stats Bar */
+.stats-bar {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    background-color: #34495E;
+    border: 1px solid #4A637A;
+    padding: 16px 32px;
+    border-radius: 8px;
+    min-width: 400px;
+}
+
+.stat-item {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.stat-item label {
+    font-size: 16px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #ECF0F1;
+}
+
+.stat-value {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 24px;
+    font-weight: 700;
+    color: #F1C40F;
+}
+
+#lives-count, #wave-count {
+    color: #ECF0F1;
+}
+
+/* Game Area */
+.game-area {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+/* Game Map */
+.game-map {
+    width: 800px;
+    height: 600px;
+    background-color: #A9D18E;
+    border: 2px solid #4A637A;
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+}
+
+.game-map.build-mode {
+    cursor: crosshair;
+}
+
+/* Enemy Path SVG */
+.enemy-path-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.enemy-path-line {
+    stroke-dasharray: 5, 5;
+    opacity: 0.8;
+    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.3));
+}
+
+/* Map Tiles */
+.map-tile {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.map-tile.path {
+    background-color: #C2B280;
+}
+
+.map-tile.buildable {
+    background-color: #A9D18E;
+    transition: background-color 0.2s ease;
+}
+
+.map-tile.buildable:hover {
+    background-color: #98C77B;
+}
+
+.map-tile.base {
+    background-color: #C0392B;
+    border: 2px solid #A93226;
+}
+
+/* Tower Preview */
+.tower-preview {
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    opacity: 0.6;
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Towers */
+.tower {
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    z-index: 5;
+    transition: filter 0.1s ease;
+}
+
+.tower.firing {
+    filter: brightness(1.5);
+}
+
+.tower.archer {
+    background-color: #874C1E;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.tower.catapult {
+    background-color: #5D6D7E;
+}
+
+.tower.mage {
+    background-color: #1ABC9C;
+}
+
+.tower.cannon {
+    background-color: #8B4513;
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+}
+
+/* Tower Range Display */
+.tower-range {
+    position: absolute;
+    border: 2px dashed rgba(241, 196, 15, 0.6);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 3;
+    display: none;
+}
+
+.tower:hover .tower-range {
+    display: block;
+}
+
+/* Enemies */
+.enemy {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    z-index: 4;
+    transition: all 0.1s linear;
+}
+
+.enemy.infantry {
+    background-color: #3498DB;
+}
+
+.enemy.cavalry {
+    background-color: #8E44AD;
+}
+
+.enemy.scout {
+    background-color: #E67E22;
+}
+
+.enemy.tank {
+    background-color: #2C3E50;
+    border: 2px solid #34495E;
+}
+
+/* Projectiles */
+.projectile {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background-color: #F1C40F;
+    border-radius: 50%;
+    z-index: 6;
+    transition: all 0.1s linear;
+}
+
+/* Tower Panel */
+.tower-panel {
+    background-color: #34495E;
+    border: 1px solid #4A637A;
+    padding: 16px;
+    border-radius: 8px;
+    width: 200px;
+}
+
+.tower-panel h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    text-align: center;
+    color: #F1C40F;
+}
+
+.tower-selection {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Tower Icons */
+.tower-icon {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: #2C3E50;
+    border: 1px solid #4A637A;
+    padding: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+.tower-icon:hover {
+    border-color: #F1C40F;
+    transform: translateY(-2px);
+}
+
+.tower-icon:focus {
+    border-color: #F1C40F;
+    box-shadow: 0 0 0 2px rgba(241, 196, 15, 0.3);
+}
+
+.tower-icon.selected {
+    border: 2px solid #F1C40F;
+    background-color: #34495E;
+    box-shadow: inset 0 0 8px rgba(0,0,0,0.3);
+}
+
+.tower-icon.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: #95A5A6;
+}
+
+.tower-icon.disabled:hover {
+    transform: none;
+    border-color: #4A637A;
+}
+
+/* Tower Shapes */
+.tower-shape {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.archer-shape {
+    background-color: #874C1E;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.catapult-shape {
+    background-color: #5D6D7E;
+    border-radius: 4px;
+}
+
+.mage-shape {
+    background-color: #1ABC9C;
+    border-radius: 50%;
+}
+
+.cannon-shape {
+    background-color: #8B4513;
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+}
+
+/* Tower Info */
+.tower-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+}
+
+.tower-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #ECF0F1;
+}
+
+.tower-cost {
+    font-size: 12px;
+    font-family: 'Roboto Mono', monospace;
+    color: #F1C40F;
+}
+
+.tower-rng {
+    font-size: 12px;
+    font-family: 'Roboto Mono', monospace;
+    color: #F1C40F;
+}
+
+.tower-dmg {
+    font-size: 12px;
+    font-family: 'Roboto Mono', monospace;
+    color: #F1C40F;
+}
+
+/* Game Controls */
+.game-controls {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+.control-btn {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.start-btn {
+    background-color: #3498DB;
+    color: #ECF0F1;
+}
+
+.start-btn:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+}
+
+.start-btn:disabled {
+    background-color: #95A5A6;
+    cursor: not-allowed;
+    transform: none;
+    filter: none;
+}
+
+.restart-btn {
+    background-color: #E74C3C;
+    color: #ECF0F1;
+}
+
+.restart-btn:hover {
+    background-color: #C0392B;
+    transform: translateY(-2px);
+}
+
+/* Screen Reader Only Content */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .game-area {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .tower-panel {
+        width: 100%;
+        max-width: 600px;
+    }
+    
+    .tower-selection {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .tower-icon {
+        flex-direction: column;
+        min-width: 120px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 900px) {
+    .game-map {
+        width: 640px;
+        height: 480px;
+    }
+    
+    .stats-bar {
+        min-width: auto;
+        width: 100%;
+        max-width: 640px;
+        gap: 24px;
+    }
+}
+
+@media (max-width: 700px) {
+    .game-map {
+        width: 480px;
+        height: 360px;
+    }
+    
+    .stats-bar {
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+    }
+    
+    .stat-item {
+        flex-direction: row;
+        gap: 12px;
+        align-items: center;
+    }
+    
+    .game-controls {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+    
+    .control-btn {
+        width: 200px;
+    }
+}

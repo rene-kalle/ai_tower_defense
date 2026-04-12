@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tower Defense Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="game-header">
+        <h1>Tower Defense</h1>
+    </header>
+
+    <main class="game-container">
+        <!-- Top Stats Bar -->
+        <section class="stats-bar">
+            <div class="stat-item">
+                <label>Gold</label>
+                <span id="gold-count" class="stat-value">200</span>
+            </div>
+            <div class="stat-item">
+                <label>Lives</label>
+                <span id="lives-count" class="stat-value">20</span>
+            </div>
+            <div class="stat-item">
+                <label>Wave</label>
+                <span id="wave-count" class="stat-value">0</span>
+            </div>
+        </section>
+
+        <!-- Game Area -->
+        <div class="game-area">
+            <!-- Main Game Map -->
+            <div id="game-map" class="game-map">
+                <svg id="enemy-path-svg" class="enemy-path-svg" viewBox="0 0 800 600" preserveAspectRatio="none">
+                    <polyline id="enemy-path-line" class="enemy-path-line" fill="none" stroke="#F39C12" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+
+            <!-- Tower Selection Panel -->
+            <aside class="tower-panel">
+                <h3>Towers</h3>
+                <div class="tower-selection">
+                    <div class="tower-icon" data-tower-type="archer" tabindex="0" role="button" aria-label="Build Archer Tower. Cost: 100 Gold. Fast-firing, single target.">
+                        <div class="tower-shape archer-shape"></div>
+                        <div class="tower-info">
+                            <div class="tower-name">Archer</div>
+                            <div class="tower-cost">100 Gold</div>
+                            <div class="tower-rng">range 80</div>
+                            <div class="tower-dmg">damage 20</div>
+                        </div>
+                    </div>
+                    
+                    <div class="tower-icon" data-tower-type="catapult" tabindex="0" role="button" aria-label="Build Catapult Tower. Cost: 200 Gold. Heavy damage, slow fire rate.">
+                        <div class="tower-shape catapult-shape"></div>
+                        <div class="tower-info">
+                            <div class="tower-name">Catapult</div>
+                            <div class="tower-cost">200 Gold</div>
+                            <div class="tower-rng">range 120</div>
+                            <div class="tower-dmg">damage 50</div>
+                        </div>
+                    </div>
+                    
+                    <div class="tower-icon" data-tower-type="mage" tabindex="0" role="button" aria-label="Build Mage Tower. Cost: 300 Gold. Magic damage, area effect.">
+                        <div class="tower-shape mage-shape"></div>
+                        <div class="tower-info">
+                            <div class="tower-name">Mage</div>
+                            <div class="tower-cost">300 Gold</div>
+                            <div class="tower-rng">range 100</div>
+                            <div class="tower-dmg">damage 30</div>
+                        </div>
+                    </div>
+                    
+                    <div class="tower-icon" data-tower-type="cannon" tabindex="0" role="button" aria-label="Build Cannon Tower. Cost: 400 Gold. Explosive damage, long range.">
+                        <div class="tower-shape cannon-shape"></div>
+                        <div class="tower-info">
+                            <div class="tower-name">Cannon</div>
+                            <div class="tower-cost">400 Gold</div>
+                            <div class="tower-rng">range 120</div>
+                            <div class="tower-dmg">damage 100</div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Game Controls -->
+        <section class="game-controls">
+            <button id="start-wave-btn" class="control-btn start-btn">Start Next Wave</button>
+            <button id="restart-btn" class="control-btn restart-btn">Restart</button>
+        </section>
+    </main>
+
+    <!-- Screen Reader Announcements -->
+    <div id="sr-announcements" class="sr-only" aria-live="assertive"></div>
+    <div id="sr-stats" class="sr-only" aria-live="polite"></div>
+
+    <script src="game.js" defer></script>
+</body>
+</html>
