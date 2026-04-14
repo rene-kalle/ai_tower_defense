@@ -73,25 +73,25 @@ const GAME_CONFIG = {
 
 // Predefined enemy path coordinates
 // --> original
-// const ENEMY_PATH = [
-//     {x: -20, y: 200},   // spawn point (off-screen)
-//     {x: 40, y: 200},
-//     {x: 120, y: 200},
-//     {x: 200, y: 200},
-//     {x: 280, y: 200},
-//     {x: 280, y: 120},
-//     {x: 360, y: 120},
-//     {x: 440, y: 120},
-//     {x: 440, y: 280},
-//     {x: 520, y: 280},
-//     {x: 600, y: 280},
-//     {x: 680, y: 280},
-//     {x: 680, y: 200},
-//     {x: 760, y: 200},
-//     {x: 820, y: 200}    // base (off-screen)
-// ];
-// zum rum spielen
-const ENEMY_PATH = [
+const ENEMY_PATH_1 = [
+    {x: -20, y: 200},   // spawn point (off-screen)
+    {x: 40, y: 200},
+    {x: 120, y: 200},
+    {x: 200, y: 200},
+    {x: 280, y: 200},
+    {x: 280, y: 120},
+    {x: 360, y: 120},
+    {x: 440, y: 120},
+    {x: 440, y: 280},
+    {x: 520, y: 280},
+    {x: 600, y: 280},
+    {x: 680, y: 280},
+    {x: 680, y: 200},
+    {x: 760, y: 200},
+    {x: 820, y: 200}    // base (off-screen)
+];
+// eine grade Linie
+const ENEMY_PATH_2 = [
     {x: -20, y: 300},   // spawn point (off-screen)
     {x: 40, y: 300},
     {x: 120, y: 300},
@@ -108,6 +108,26 @@ const ENEMY_PATH = [
     {x: 760, y: 300},
     {x: 820, y: 300}    // base (off-screen)
 ];
+// Zick Zack
+const ENEMY_PATH_3 = [
+    {x: -20, y: 300},   // spawn point (off-screen)
+    {x: 220, y: 300},
+    {x: 220, y: 140},
+    {x: 420, y: 140},
+    {x: 420, y: 460},
+    {x: 620, y: 460},
+    // {x: 280, y: 120},
+    // {x: 360, y: 120},
+    // {x: 440, y: 120},
+    // {x: 440, y: 280},
+    // {x: 520, y: 280},
+    // {x: 600, y: 280},
+    // {x: 680, y: 280},
+    {x: 620, y: 300},
+    // {x: 760, y: 300},
+    {x: 820, y: 300}    // base (off-screen)
+];
+var ENEMY_PATH = ENEMY_PATH_1; // Standardpfad, kann durch Auswahl geändert werden
 
 // Wave configurations
 const WAVE_CONFIG = [
@@ -169,7 +189,16 @@ class Game {
         
         this.gameLoop = null;
         this.towerPreview = null;
-        
+
+        // get path from URL parameter (if provided)
+        const urlParams = new URLSearchParams(window.location.search);
+        const pathParam = urlParams.get('path');
+        if (pathParam === '2') {
+            ENEMY_PATH = ENEMY_PATH_2;
+        } else if (pathParam === '3') {
+            ENEMY_PATH = ENEMY_PATH_3;
+        }
+
         this.init();
     }
     

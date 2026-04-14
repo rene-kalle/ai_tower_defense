@@ -172,26 +172,31 @@ body {
 
 .tower.archer {
     background-color: #874C1E;
-    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    /* clip-path: polygon(50% 0%, 0% 100%, 100% 100%); */
+    border-radius: 8px;
 }
 
 .tower.catapult {
     background-color: #5D6D7E;
+    border-radius: 8px;
 }
 
 .tower.mage {
     background-color: #1ABC9C;
+    border-radius: 50%;
 }
 
 .tower.cannon {
     background-color: #8B4513;
-    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    /* clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%); */
+    border-radius: 50%;
 }
 
 /* Tower Range Display */
 .tower-range {
     position: absolute;
     border: 2px dashed rgba(241, 196, 15, 0.6);
+    border: 3px dashed rgba(241, 15, 15, 0.6);
     border-radius: 50%;
     pointer-events: none;
     z-index: 3;
@@ -315,12 +320,13 @@ body {
 
 .archer-shape {
     background-color: #874C1E;
-    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    /* clip-path: polygon(50% 0%, 0% 100%, 100% 100%); */
+    border-radius: 8px;
 }
 
 .catapult-shape {
     background-color: #5D6D7E;
-    border-radius: 4px;
+    border-radius: 8px;
 }
 
 .mage-shape {
@@ -330,7 +336,8 @@ body {
 
 .cannon-shape {
     background-color: #8B4513;
-    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    /* clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%); */
+    border-radius: 50%;
 }
 
 /* Tower Info */
